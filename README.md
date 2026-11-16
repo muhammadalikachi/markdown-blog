@@ -94,6 +94,16 @@ Hello, world! This is **Markdown**.
 
 ## 🐳 Deployment notes
 
+### CI / Docker image
+This repo includes a [GitHub Actions workflow](.github/workflows/docker.yml) that builds
+the production image on every push to `main` and publishes it to GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/muhammadalikachi/markdown-blog:latest
+```
+
+A green workflow run is the fastest way to verify the image builds cleanly.
+
 ### Persistent volumes
 `docker-compose.yml` mounts two volumes so **user content survives updates**:
 
