@@ -1,0 +1,26 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# env files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# user content: uploads are runtime data, keep the folder but ignore files
+/uploads/*
+!/uploads/.gitkeep
+
+# posts folder is intentionally NOT ignored - content lives in the repo

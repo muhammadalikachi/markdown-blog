@@ -1,0 +1,23 @@
+services:
+  blog:
+    build: .
+    image: markdown-blog:latest
+    container_name: markdown-blog
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Override these via a .env file next to this compose file
+      - SITE_URL=${SITE_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_SITE_NAME=${NEXT_PUBLIC_SITE_NAME:-Markdown Blog}
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in your .env file}
+      - AUTH_SECRET=${AUTH_SECRET:?Set AUTH_SECRET in your .env file}
+    volumes:
+      # Persistent storage: user content survives rebuilds and updates
+      - posts_data:/app/posts
+      - uploads_data:/app/uploads
+
+volumes:
+  posts_data:
+  uploads_data:
