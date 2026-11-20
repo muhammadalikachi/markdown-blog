@@ -1,61 +1,88 @@
 # Markdown Blog
 
-A lightweight, open-source blog engine that runs entirely on **plain Markdown files**.
-No database. No lock-in. Your posts are `.md` files you own, edit anywhere, and version with Git.
+### Your blog is just a folder of Markdown files.
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![Docker](https://img.shields.io/badge/Docker-ready-2496ED)
+A fast, minimalist, self-hosted blog engine with **zero database**. Write `.md` files (or use the built-in browser editor), drop them in a folder, and Docker serves a beautiful blog with dark mode, search, tags, SEO and RSS.
 
-<!-- TODO: replace with the real template id once the app is registered with Hostinger -->
-[![Deploy to Hostinger](https://raw.githubusercontent.com/your-org/markdown-blog/main/docs/deploy-button.svg)](https://deploy.pages.hostinger.dev/template/markdown-blog)
+No MySQL. No Postgres. No CMS to babysit. The filesystem *is* the database — and your content stays portable forever.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Docker Build](https://github.com/muhammadalikachi/markdown-blog/actions/workflows/docker.yml/badge.svg)](https://github.com/muhammadalikachi/markdown-blog/actions/workflows/docker.yml)
+[![Next.js 14](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
+[![Docker Ready](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](#-quick-start-docker)
+[![GitHub stars](https://img.shields.io/github/stars/muhammadalikachi/markdown-blog?style=social)](https://github.com/muhammadalikachi/markdown-blog/stargazers)
+
+<!-- TODO: replace the template id once the app is registered with Hostinger -->
+[![Deploy to Hostinger](docs/deploy-button.svg)](https://deploy.pages.hostinger.dev/template/markdown-blog)
+
+![Markdown Blog - home page](docs/screenshot-home.png)
+
+## Why another blog engine?
+
+Most self-hosted blogs are WordPress, Ghost, or a static site generator. They're great — until you want something in between:
+
+| | WordPress / Ghost | Static generators | **Markdown Blog** |
+|---|---|---|---|
+| Database required | ✅ MySQL / SQLite | ❌ | **❌ none** |
+| Write from the browser | ✅ | ❌ | **✅ built-in admin** |
+| Content is portable files | ❌ | ✅ | **✅ plain `.md`** |
+| One-command Docker deploy | ~ | ~ | **✅** |
+| No build step per post | ❌ | ❌ | **✅ files read at runtime** |
+
+If you want **a real editor in the browser** *and* **your posts as plain files you own** — without running a database — this is for you.
 
 ## ✨ Features
 
-### Reader
-- **Clean, minimalist UI** — fast-loading, distraction-free reading experience
-- **🌙 Dark / Light mode** — respects system preference, remembered per visitor
-- **📱 Mobile responsive** — looks great on any screen size
-- **🏷️ Tag filtering** — one-click filtering by category/tag
-- **🔎 Instant search** — client-side search with zero network round-trips
-- **💻 Syntax highlighting** — dozens of languages via highlight.js
+**Writing**
+- 🔐 Password-protected admin at `/admin` (credentials from env vars)
+- ✍️ Create, edit, delete posts from the browser
+- 👁️ **Live preview** — rendered Markdown side-by-side as you type
+- 🖼️ Image uploads — URL inserted at your cursor automatically
+- 📝 Draft mode for unfinished posts
 
-### Admin dashboard (`/admin`)
-- Secure login with credentials from environment variables
-- **Create, edit, delete** posts right from the browser
-- **Live preview** — rendered Markdown side-by-side as you type
-- **Image uploads** — click to upload, the URL is inserted at your cursor
-- Draft mode for work-in-progress posts
+**Reading**
+- 🎨 Clean, minimalist, mobile-first UI
+- 🌙 **Dark / light mode** — system-aware and remembered
+- 🔎 **Instant search** and 🏷️ tag filtering
+- 💻 Syntax highlighting for dozens of languages
 
-### SEO & feeds
-- Dynamic per-post `<meta>` and **OpenGraph/Twitter** tags
-- JSON-LD structured data (BlogPosting)
-- Auto-generated **`sitemap.xml`**, **`rss.xml`**, and `robots.txt`
-
-### Under the hood
-- **File-based storage** — posts are Markdown files with YAML frontmatter in `/posts`
-- **Zero database** — nothing to install, back up, or migrate
-- **Dockerized** — optimized multi-stage image with persistent volumes
+**Shipping**
+- 🔎 SEO-ready: per-post meta + OpenGraph/Twitter cards, JSON-LD
+- 📡 Auto-generated `sitemap.xml`, `rss.xml`, `robots.txt`
+- 🐳 Multi-stage Docker image with **persistent volumes**
+- ⚡ Fast: ~97 kB First Load JS, no database round-trips
 
 ## 🚀 Quick start (Docker)
 
+**Prerequisite:** Docker + Docker Compose.
+
 ```bash
-git clone https://github.com/your-org/markdown-blog.git
+git clone https://github.com/muhammadalikachi/markdown-blog.git
 cd markdown-blog
 
-# Configure environment
 cp .env.example .env
-# then edit .env — set ADMIN_USER, ADMIN_PASSWORD, AUTH_SECRET, SITE_URL
-# generate a secret with:  openssl rand -hex 32
+# Edit .env: set ADMIN_PASSWORD, AUTH_SECRET and SITE_URL
+# Generate a secret:  openssl rand -hex 32
 
-# Build and run
 docker compose up -d --build
 ```
 
-- Blog: `http://localhost:3000`
-- Admin: `http://localhost:3000/admin`
+That's it:
 
-## 🚀 Quick start (local development)
+| | |
+|---|---|
+| 📖 Blog | http://localhost:3000 |
+| 🔐 Admin | http://localhost:3000/admin |
+
+Your posts live in the `posts/` volume and uploads in `uploads/` — they survive every rebuild and update.
+
+### Or pull the prebuilt image
+
+```bash
+docker pull ghcr.io/muhammadalikachi/markdown-blog:latest
+```
+
+## 💻 Quick start (local development)
 
 Requires Node.js 18.17+.
 
@@ -65,13 +92,19 @@ cp .env.example .env      # then edit .env
 npm run dev               # http://localhost:3000
 ```
 
+## 📸 Screenshots
+
+| Home (light) | Home (dark) | Admin editor with live preview |
+| ------------ | ----------- | ------------------------------ |
+| ![Home light](docs/screenshot-home.png) | ![Home dark](docs/screenshot-dark.png) | ![Editor](docs/screenshot-admin.png) |
+
 ## ✍️ Writing posts
 
-### Via the admin dashboard
-Sign in at `/admin`, click **+ New post**, write in Markdown with live preview, and publish. Uploaded images are stored in `/uploads` and referenced automatically.
+### From the admin dashboard
+Sign in at `/admin`, click **+ New post**, write Markdown with live preview, upload images, and publish. Done.
 
-### Via files
-Drop a Markdown file into the `posts/` folder:
+### From files (or Git)
+Every post is a Markdown file in `posts/`:
 
 ```markdown
 ---
@@ -92,11 +125,12 @@ Hello, world! This is **Markdown**.
 | `draft`         | no       | `true` hides the post from the public site         |
 | `excerpt`       | no       | Custom excerpt; auto-generated if omitted          |
 
+You can write in your editor of choice, commit the file, and the post is live — no rebuild needed.
+
 ## 🐳 Deployment notes
 
 ### CI / Docker image
-This repo includes a [GitHub Actions workflow](.github/workflows/docker.yml) that builds
-the production image on every push to `main` and publishes it to GitHub Container Registry:
+A [GitHub Actions workflow](.github/workflows/docker.yml) builds the production image on every push to `main` and publishes it to GitHub Container Registry:
 
 ```bash
 docker pull ghcr.io/muhammadalikachi/markdown-blog:latest
@@ -163,16 +197,14 @@ markdown-blog/
 - [gray-matter](https://github.com/jonschlinkert/gray-matter) for frontmatter
 - Zero database — the filesystem *is* the database
 
-## 📸 Screenshots
-
-| Home (light) | Home (dark) | Admin editor with live preview |
-| ------------ | ----------- | ------------------------------ |
-| ![Home light](docs/screenshot-home.png) | ![Home dark](docs/screenshot-dark.png) | ![Editor](docs/screenshot-admin.png) |
-
 ## 🤝 Contributing
 
-Contributions are welcome! Please open an issue or pull request.
+Contributions are very welcome — bug reports, feature ideas, docs fixes, and PRs of any size.
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) to get started
+- Open an [issue](https://github.com/muhammadalikachi/markdown-blog/issues) for bugs or ideas
+- **If this project saves you time, a ⭐ helps others find it!**
 
 ## 📄 License
 
-[MIT](LICENSE)
+[MIT](LICENSE) — free for personal and commercial use.

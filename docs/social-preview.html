@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Markdown Blog — social preview</title>
+<style>
+  /* Rendered at 1280x640 for GitHub's social preview. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #0d1117; }
+  .banner {
+    width: 1280px;
+    height: 640px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 500px at 85% 15%, rgba(37, 99, 235, 0.22), transparent 60%),
+      radial-gradient(700px 400px at 10% 90%, rgba(88, 166, 255, 0.10), transparent 60%),
+      #0d1117;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #e6edf3;
+    display: flex;
+    align-items: center;
+    padding: 80px;
+  }
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 85%);
+  }
+  .left { position: relative; z-index: 2; max-width: 760px; }
+  .badge {
+    display: inline-block;
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #58a6ff;
+    border: 1px solid rgba(88, 166, 255, 0.35);
+    background: rgba(88, 166, 255, 0.08);
+    border-radius: 999px;
+    padding: 8px 18px;
+    margin-bottom: 28px;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 84px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 26px;
+  }
+  h1 .accent { color: #58a6ff; }
+  .tagline {
+    font-size: 30px;
+    line-height: 1.4;
+    color: #9da7b3;
+    margin-bottom: 40px;
+  }
+  .tagline code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 26px;
+    color: #e6edf3;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 2px 10px;
+  }
+  .pills { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pill {
+    font-size: 19px;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    background: rgba(22, 27, 34, 0.9);
+    border-radius: 10px;
+    padding: 10px 18px;
+  }
+  .pill b { color: #58a6ff; font-weight: 600; }
+
+  /* Right-side file card */
+  .card {
+    position: absolute;
+    right: 76px;
+    top: 50%;
+    transform: translateY(-50%) rotate(3deg);
+    width: 330px;
+    border-radius: 18px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(88,166,255,0.08);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #21262d;
+    background: #1b2129;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.r { background: #ff5f56; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #27c93f; }
+  .filename {
+    margin-left: 8px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 15px;
+    color: #8b949e;
+  }
+  .card-body {
+    padding: 20px 22px 24px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+  .fm { color: #8b949e; }
+  .key { color: #79c0ff; }
+  .str { color: #a5d6ff; }
+  .h2 { color: #d2a8ff; font-weight: 700; }
+  .txt { color: #c9d1d9; }
+  .md { color: #7ee787; }
+  .footer-note {
+    position: absolute;
+    left: 80px;
+    bottom: 34px;
+    font-size: 16px;
+    color: #6e7681;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="grid"></div>
+    <div class="left">
+      <span class="badge">Open source · Zero database</span>
+      <h1>Markdown<br /><span class="accent">Blog</span></h1>
+      <p class="tagline">Your blog is just a folder of <code>.md</code> files.</p>
+      <div class="pills">
+        <span class="pill">Next.js 14</span>
+        <span class="pill">Docker one-liner</span>
+        <span class="pill"><b>No</b> MySQL</span>
+        <span class="pill">MIT</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="filename">hello-world.md</span>
+      </div>
+      <div class="card-body">
+        <div class="fm">---</div>
+        <div><span class="key">title</span>: <span class="str">"Hello, world"</span></div>
+        <div><span class="key">tags</span>: [<span class="str">"docker"</span>]</div>
+        <div class="fm">---</div>
+        <div class="h2">## Just files.</div>
+        <div class="txt">No database. No lock-in.</div>
+        <div class="txt">Write <span class="md">**Markdown**</span>, hit publish.</div>
+      </div>
+    </div>
+    <div class="footer-note">github.com/muhammadalikachi/markdown-blog</div>
+  </div>
+</body>
+</html>
