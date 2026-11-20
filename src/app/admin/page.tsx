@@ -397,7 +397,7 @@ export default function AdminPage() {
             className="admin-btn primary"
             type="button"
           >
-            {saving ? "Saving…" : draft.draft ? "Publish" : "Update"}
+            {saving ? "Saving…" : draft.draft || !draft.slug ? "Publish" : "Update"}
           </button>
           <button
             onClick={() => handleSave(false)}

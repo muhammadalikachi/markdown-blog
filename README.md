@@ -17,6 +17,10 @@ No MySQL. No Postgres. No CMS to babysit. The filesystem *is* the database — a
 
 ![Markdown Blog - home page](docs/screenshot-home.png)
 
+![Demo: write Markdown, watch the live preview, publish in one click](docs/demo.gif)
+
+*Write Markdown in the browser → watch the live preview → publish. No rebuild, no database.*
+
 ## Why another blog engine?
 
 Most self-hosted blogs are WordPress, Ghost, or a static site generator. They're great — until you want something in between:
